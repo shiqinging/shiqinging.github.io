@@ -1,0 +1,123 @@
+# Hexo Configuration
+# Docs: https://hexo.io/docs/configuration.html
+
+# Site
+title: 我的博客
+subtitle: ''
+description: '精心整理的笔记与文档，让知识触手可及'
+keywords: '博客，笔记，技术，AI'
+author: 作者
+language: zh-CN
+timezone: 'Asia/Shanghai'
+
+# URL
+url: https://shiqinging.github.io
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true
+  trailing_html: true
+
+# Directory
+source_dir: source
+public_dir: docs
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md
+default_layout: post
+titlecase: false
+external_link:
+  enable: true
+  field: site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+syntax_highlighter: highlight.js
+
+# Code Highlight
+highlight:
+  line_number: true
+  tab_replace: ''
+  wrap: true
+  exclude_languages: []
+  language_attr: false
+  hljs: false
+  line_threshold: 0
+  first_line_number: always1
+  strip_indent: true
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Format
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+updated_option: mtime
+
+# Pagination
+per_page: 10
+pagination_dir: page
+
+# Theme
+theme: fluid
+
+# Deployment
+deploy:
+  type: git
+  repo: https://github.com/shiqinging/shiqinging.github.io.git
+  branch: main
+
+# Extensions
+marked:
+  gfm: true
+  pedantic: false
+  breaks: true
+  smartLists: true
+  smartypants: true
+  modifyAnchors: 0
+  autolink: true
+  mangle: true
+  sanitizeUrl: false
+  dompurify: false
+  headerIds: true
+  anchorAlias: false
+  lazyload: false
+  prependRoot: true
+  postAsset: false
+  external_link:
+    enable: false
+    exclude: []
+    nofollow: false
+  descriptionLists: true
+
+# Generator
+index_generator:
+  per_page: 10
+  order_by: '-date'
+  layout:
+    - index
+    - archive
+
+archive_generator:
+  per_page: 10
+  yearly: true
+  monthly: true
+  daily: false
+
+category_generator:
+  per_page: 10
+
+tag_generator:
+  per_page: 10
