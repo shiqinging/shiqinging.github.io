@@ -1,0 +1,47 @@
+#---------------------------
+# Hexo Theme Fluid
+#---------------------------
+
+# 网站标题
+web_title: "我的博客"
+
+# 作者名称
+author: "作者"
+
+# 导航栏配置
+navbar:
+  blog_title: "我的博客"
+  # 导航栏菜单
+  menu:
+    - { key: "home", link: "/", icon: "iconfont icon-home-fill" }
+    - { key: "archive", link: "/archives/", icon: "iconfont icon-archive-fill" }
+    - { key: "category", link: "/categories/", icon: "iconfont icon-category-fill" }
+    - { key: "tag", link: "/tags/", icon: "iconfont icon-tags-fill" }
+
+# 主菜单配置（兼容旧配置）
+menu:
+  - { key: "home", label: "首页", icon: "icon-home", link: "/" }
+  - { key: "archive", label: "归档", icon: "icon-archive", link: "/archives/" }
+  - { key: "category", label: "分类", icon: "icon-category", link: "/categories/" }
+  - { key: "tag", label: "标签", icon: "icon-tags", link: "/tags/" }
+
+# 首页配置
+index:
+  banner_img: "/img/default.png"
+  banner_text: ""
+  # 首页副标题（打字机效果）
+  slogan:
+    enable: true
+    text: "精心整理的笔记与文档，让知识触手可及"
+
+# 文章配置
+post:
+  banner_img: "/img/default.png"
+  # 关闭文章底部版权声明
+  copyright:
+    enable: false
+
+# 页脚配置
+footer:
+  content: ""
+  hide: true

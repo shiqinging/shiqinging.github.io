@@ -1,0 +1,867 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="时倾">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="什么是自动化测试自动化测试（Automated Testing）是指使用专门的测试工具和框架，通过脚本或程序自动执行测试用例、验证结果并生成测试报告的过程。相比手动测试，自动化测试具有可重复、高效率、覆盖广的特点。 核心价值 提高效率：一次编写，多次执行，大幅减少重复劳动 快速反馈：集成到 CI&#x2F;CD 流程中，问题早发现早修复 保证质量：减少人为错误，测试覆盖更全面 节省成本：长期来看，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自动化测试">
+<meta property="og:url" content="https://shiqinging.github.io/2026/03/17/test/%E8%87%AA%E5%8A%A8%E5%8C%96%E6%B5%8B%E8%AF%95/index.html">
+<meta property="og:site_name" content="时倾的博客">
+<meta property="og:description" content="什么是自动化测试自动化测试（Automated Testing）是指使用专门的测试工具和框架，通过脚本或程序自动执行测试用例、验证结果并生成测试报告的过程。相比手动测试，自动化测试具有可重复、高效率、覆盖广的特点。 核心价值 提高效率：一次编写，多次执行，大幅减少重复劳动 快速反馈：集成到 CI&#x2F;CD 流程中，问题早发现早修复 保证质量：减少人为错误，测试覆盖更全面 节省成本：长期来看，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-17T11:39:28.000Z">
+<meta property="article:modified_time" content="2026-03-17T12:25:48.406Z">
+<meta property="article:author" content="时倾">
+<meta property="article:tag" content="测试">
+<meta property="article:tag" content="自动化">
+<meta property="article:tag" content="质量保障">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>自动化测试 - 时倾的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"shiqinging.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>我的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="自动化测试"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-17 19:39" pubdate>
+          2026年3月17日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          25 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">自动化测试</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="什么是自动化测试"><a href="#什么是自动化测试" class="headerlink" title="什么是自动化测试"></a>什么是自动化测试</h2><p>自动化测试（Automated Testing）是指使用专门的测试工具和框架，通过脚本或程序自动执行测试用例、验证结果并生成测试报告的过程。相比手动测试，自动化测试具有<strong>可重复、高效率、覆盖广</strong>的特点。</p>
+<h3 id="核心价值"><a href="#核心价值" class="headerlink" title="核心价值"></a>核心价值</h3><ul>
+<li><strong>提高效率</strong>：一次编写，多次执行，大幅减少重复劳动</li>
+<li><strong>快速反馈</strong>：集成到 CI&#x2F;CD 流程中，问题早发现早修复</li>
+<li><strong>保证质量</strong>：减少人为错误，测试覆盖更全面</li>
+<li><strong>节省成本</strong>：长期来看，降低测试人力成本</li>
+</ul>
+<hr>
+<h2 id="测试金字塔"><a href="#测试金字塔" class="headerlink" title="测试金字塔"></a>测试金字塔</h2><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-code">        /\</span><br><span class="hljs-code">       /  \</span><br><span class="hljs-code">      / E2E \      端到端测试（数量少，执行慢）</span><br><span class="hljs-code">     /------\</span><br><span class="hljs-code">    /        \</span><br><span class="hljs-code">   /  集成测试  \    集成测试（适中数量）</span><br><span class="hljs-code">  /------------\</span><br><span class="hljs-code"> /              \</span><br><span class="hljs-section">/    单元测试      \   单元测试（数量多，执行快）</span><br><span class="hljs-section">------------------</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="1-单元测试（Unit-Testing）"><a href="#1-单元测试（Unit-Testing）" class="headerlink" title="1. 单元测试（Unit Testing）"></a>1. 单元测试（Unit Testing）</h3><p>测试最小可测试单元（函数、方法、类），特点是<strong>快速、独立、覆盖率高</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// Jest 示例</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a, b</span>) &#123;<br>  <span class="hljs-keyword">return</span> a + b;<br>&#125;<br><br><span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;adds two numbers&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-title function_">expect</span>(<span class="hljs-title function_">add</span>(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)).<span class="hljs-title function_">toBe</span>(<span class="hljs-number">5</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p><strong>常用框架：</strong></p>
+<table>
+<thead>
+<tr>
+<th>语言</th>
+<th>框架</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JavaScript</td>
+<td>Jest, Mocha, Vitest</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>pytest, unittest</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>JUnit, TestNG</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>testing (内置)</td>
+</tr>
+</tbody></table>
+<h3 id="2-集成测试（Integration-Testing）"><a href="#2-集成测试（Integration-Testing）" class="headerlink" title="2. 集成测试（Integration Testing）"></a>2. 集成测试（Integration Testing）</h3><p>测试多个模块之间的交互，验证组件间的接口是否正确。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 测试 API 与数据库的交互</span><br><span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;user registration flows correctly&#x27;</span>, <span class="hljs-title function_">async</span> () =&gt; &#123;<br>  <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">await</span> <span class="hljs-title function_">createUser</span>(&#123; <span class="hljs-attr">email</span>: <span class="hljs-string">&#x27;test@example.com&#x27;</span> &#125;);<br>  <span class="hljs-keyword">const</span> found = <span class="hljs-keyword">await</span> <span class="hljs-title function_">findUserByEmail</span>(<span class="hljs-string">&#x27;test@example.com&#x27;</span>);<br>  <span class="hljs-title function_">expect</span>(found.<span class="hljs-property">id</span>).<span class="hljs-title function_">toBe</span>(user.<span class="hljs-property">id</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<h3 id="3-端到端测试（E2E-Testing）"><a href="#3-端到端测试（E2E-Testing）" class="headerlink" title="3. 端到端测试（E2E Testing）"></a>3. 端到端测试（E2E Testing）</h3><p>模拟真实用户行为，从前端到后端完整测试整个流程。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// Playwright 示例</span><br><span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;login and navigate to dashboard&#x27;</span>, <span class="hljs-title function_">async</span> (&#123; page &#125;) =&gt; &#123;<br>  <span class="hljs-keyword">await</span> page.<span class="hljs-title function_">goto</span>(<span class="hljs-string">&#x27;/login&#x27;</span>);<br>  <span class="hljs-keyword">await</span> page.<span class="hljs-title function_">fill</span>(<span class="hljs-string">&#x27;[name=&quot;email&quot;]&#x27;</span>, <span class="hljs-string">&#x27;user@example.com&#x27;</span>);<br>  <span class="hljs-keyword">await</span> page.<span class="hljs-title function_">fill</span>(<span class="hljs-string">&#x27;[name=&quot;password&quot;]&#x27;</span>, <span class="hljs-string">&#x27;password123&#x27;</span>);<br>  <span class="hljs-keyword">await</span> page.<span class="hljs-title function_">click</span>(<span class="hljs-string">&#x27;button[type=&quot;submit&quot;]&#x27;</span>);<br>  <span class="hljs-keyword">await</span> <span class="hljs-title function_">expect</span>(page).<span class="hljs-title function_">toHaveURL</span>(<span class="hljs-string">&#x27;/dashboard&#x27;</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+
+<p><strong>常用工具：</strong></p>
+<ul>
+<li><strong>Playwright</strong> - 微软出品，支持多浏览器，API 友好</li>
+<li><strong>Cypress</strong> - 开发者体验好，调试方便</li>
+<li><strong>Selenium</strong> - 老牌工具，生态成熟</li>
+<li><strong>Puppeteer</strong> - Chrome 官方头文件浏览器控制库</li>
+</ul>
+<hr>
+<h2 id="测试最佳实践"><a href="#测试最佳实践" class="headerlink" title="测试最佳实践"></a>测试最佳实践</h2><h3 id="✅-应该做的"><a href="#✅-应该做的" class="headerlink" title="✅ 应该做的"></a>✅ 应该做的</h3><ol>
+<li><p><strong>命名清晰</strong>：测试名称应描述预期行为</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// ❌ 不好</span><br><span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;test1&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123; ... &#125;);<br><br><span class="hljs-comment">// ✅ 好</span><br><span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;returns empty array when input is null&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123; ... &#125;);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>保持独立</strong>：测试之间不应有依赖关系</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 每个测试应该可以独立运行</span><br><span class="hljs-title function_">beforeEach</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// 重置状态</span><br>  database.<span class="hljs-title function_">clear</span>();<br>&#125;);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 AAA 模式</strong>：Arrange（准备）→ Act（执行）→ Assert（断言）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-title function_">test</span>(<span class="hljs-string">&#x27;calculates total correctly&#x27;</span>, <span class="hljs-function">() =&gt;</span> &#123;<br>  <span class="hljs-comment">// Arrange</span><br>  <span class="hljs-keyword">const</span> items = [&#123; <span class="hljs-attr">price</span>: <span class="hljs-number">10</span> &#125;, &#123; <span class="hljs-attr">price</span>: <span class="hljs-number">20</span> &#125;];<br><br>  <span class="hljs-comment">// Act</span><br>  <span class="hljs-keyword">const</span> total = <span class="hljs-title function_">calculateTotal</span>(items);<br><br>  <span class="hljs-comment">// Assert</span><br>  <span class="hljs-title function_">expect</span>(total).<span class="hljs-title function_">toBe</span>(<span class="hljs-number">30</span>);<br>&#125;);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>测试边界条件</strong>：空值、null、极大&#x2F;极小值、特殊字符</p>
+</li>
+<li><p><strong>保持测试快速</strong>：单元测试应在毫秒级完成</p>
+</li>
+</ol>
+<h3 id="❌-避免的陷阱"><a href="#❌-避免的陷阱" class="headerlink" title="❌ 避免的陷阱"></a>❌ 避免的陷阱</h3><ol>
+<li><strong>过度测试实现细节</strong>：测试行为而非实现</li>
+<li><strong>测试之间有依赖</strong>：一个测试失败导致连锁反应</li>
+<li><strong>mock 过度</strong>：过多的 mock 会降低测试可信度</li>
+<li><strong>测试数据硬编码</strong>：使用工厂函数或 fixtures 生成测试数据</li>
+</ol>
+<hr>
+<h2 id="CI-CD-集成示例"><a href="#CI-CD-集成示例" class="headerlink" title="CI&#x2F;CD 集成示例"></a>CI&#x2F;CD 集成示例</h2><h3 id="GitHub-Actions-配置"><a href="#GitHub-Actions-配置" class="headerlink" title="GitHub Actions 配置"></a>GitHub Actions 配置</h3><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">name:</span> <span class="hljs-string">Test</span><br><br><span class="hljs-attr">on:</span> [<span class="hljs-string">push</span>, <span class="hljs-string">pull_request</span>]<br><br><span class="hljs-attr">jobs:</span><br>  <span class="hljs-attr">test:</span><br>    <span class="hljs-attr">runs-on:</span> <span class="hljs-string">ubuntu-latest</span><br><br>    <span class="hljs-attr">steps:</span><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/checkout@v4</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Setup</span> <span class="hljs-string">Node.js</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">actions/setup-node@v4</span><br>        <span class="hljs-attr">with:</span><br>          <span class="hljs-attr">node-version:</span> <span class="hljs-string">&#x27;20&#x27;</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Install</span> <span class="hljs-string">dependencies</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">ci</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">unit</span> <span class="hljs-string">tests</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">test:unit</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Run</span> <span class="hljs-string">E2E</span> <span class="hljs-string">tests</span><br>        <span class="hljs-attr">run:</span> <span class="hljs-string">npm</span> <span class="hljs-string">run</span> <span class="hljs-string">test:e2e</span><br><br>      <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Upload</span> <span class="hljs-string">coverage</span><br>        <span class="hljs-attr">uses:</span> <span class="hljs-string">codecov/codecov-action@v3</span><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="测试覆盖率"><a href="#测试覆盖率" class="headerlink" title="测试覆盖率"></a>测试覆盖率</h2><p>覆盖率是衡量测试完整性的指标，但不代表质量。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>行覆盖率</td>
+<td>有多少行代码被执行</td>
+</tr>
+<tr>
+<td>分支覆盖率</td>
+<td>有多少分支（if&#x2F;else）被测试</td>
+</tr>
+<tr>
+<td>函数覆盖率</td>
+<td>有多少函数被调用</td>
+</tr>
+<tr>
+<td>语句覆盖率</td>
+<td>有多少语句被执行</td>
+</tr>
+</tbody></table>
+<p><strong>合理目标</strong>：</p>
+<ul>
+<li>单元测试：70-90% 行覆盖率</li>
+<li>关键业务逻辑：追求 100% 覆盖</li>
+<li>UI 组件：更注重集成&#x2F;E2E 测试</li>
+</ul>
+<hr>
+<h2 id="推荐技术栈"><a href="#推荐技术栈" class="headerlink" title="推荐技术栈"></a>推荐技术栈</h2><h3 id="前端项目"><a href="#前端项目" class="headerlink" title="前端项目"></a>前端项目</h3><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs coq">单元测试：Vitest / Jest<br>组件测试：Testing <span class="hljs-keyword">Library</span><br>E2E 测试：Playwright<br>Mock 工具：MSW (Mock Service Worker)<br></code></pre></td></tr></table></figure>
+
+<h3 id="后端项目"><a href="#后端项目" class="headerlink" title="后端项目"></a>后端项目</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix">单元测试：语言自带或 pytest<span class="hljs-symbol">/JUnit</span><br>API 测试：Supertest <span class="hljs-symbol">/</span> http-test<br>集成测试：Testcontainers<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="学习资源"><a href="#学习资源" class="headerlink" title="学习资源"></a>学习资源</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://testingjavascript.com/">Testing JavaScript</a> - Kent C. Dodds</li>
+<li><a target="_blank" rel="noopener" href="https://playwright.dev/">Playwright 官方文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://testing.googleblog.com/">Google Testing Blog</a></li>
+<li>《测试驱动开发》- Kent Beck</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>记住</strong>：测试的目的是建立信心，而不是追求数字。好的测试让你放心地重构和发布。</p>
+</blockquote>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%8A%80%E6%9C%AF/" class="category-chain-item">技术</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B5%8B%E8%AF%95/" class="print-no-link">#测试</a>
+      
+        <a href="/tags/%E8%87%AA%E5%8A%A8%E5%8C%96/" class="print-no-link">#自动化</a>
+      
+        <a href="/tags/%E8%B4%A8%E9%87%8F%E4%BF%9D%E9%9A%9C/" class="print-no-link">#质量保障</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/17/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="如何通过hexo搭建个人博客">
+                        <span class="hidden-mobile">如何通过hexo搭建个人博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

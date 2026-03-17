@@ -1,0 +1,27 @@
+# Claude Code
+.claude/
+
+# Obsidian
+.obsidian/
+
+# Hexo
+public/
+.db.json
+db.json
+
+# Dependencies
+node_modules/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
