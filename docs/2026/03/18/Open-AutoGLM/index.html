@@ -1,0 +1,942 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="作者">
+  <meta name="keywords" content="博客，笔记，技术，AI">
+  
+    <meta name="description" content="克隆项目到本地1git clone https:&#x2F;&#x2F;github.com&#x2F;zai-org&#x2F;Open-AutoGLM.git 分析代码Open-AutoGLM 项目详细分析文档一、项目概述1.1 项目简介Open-AutoGLM 是一个基于视觉语言模型的手机端智能助理框架，能够通过 AI 理解手机屏幕内容并自动执行操作来完成用户任务。  核心能力：用自然语言描述需求（如”打开美团搜索附近的火锅店”）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open-AutoGLM">
+<meta property="og:url" content="https://shiqinging.github.io/2026/03/18/Open-AutoGLM/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="克隆项目到本地1git clone https:&#x2F;&#x2F;github.com&#x2F;zai-org&#x2F;Open-AutoGLM.git 分析代码Open-AutoGLM 项目详细分析文档一、项目概述1.1 项目简介Open-AutoGLM 是一个基于视觉语言模型的手机端智能助理框架，能够通过 AI 理解手机屏幕内容并自动执行操作来完成用户任务。  核心能力：用自然语言描述需求（如”打开美团搜索附近的火锅店”）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-17T14:07:22.140Z">
+<meta property="article:author" content="作者">
+<meta property="article:tag" content="随笔">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Open-AutoGLM - 我的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"shiqinging.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>我的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Open-AutoGLM"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-18 00:00" pubdate>
+          2026年3月18日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          52 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Open-AutoGLM</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="克隆项目到本地"><a href="#克隆项目到本地" class="headerlink" title="克隆项目到本地"></a>克隆项目到本地</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">git clone https://github.com/zai-org/Open-AutoGLM.git<br></code></pre></td></tr></table></figure>
+<h1 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码"></a>分析代码</h1><h1 id="Open-AutoGLM-项目详细分析文档"><a href="#Open-AutoGLM-项目详细分析文档" class="headerlink" title="Open-AutoGLM 项目详细分析文档"></a>Open-AutoGLM 项目详细分析文档</h1><h2 id="一、项目概述"><a href="#一、项目概述" class="headerlink" title="一、项目概述"></a>一、项目概述</h2><h3 id="1-1-项目简介"><a href="#1-1-项目简介" class="headerlink" title="1.1 项目简介"></a>1.1 项目简介</h3><p><strong>Open-AutoGLM</strong> 是一个基于视觉语言模型的手机端智能助理框架，能够通过 AI 理解手机屏幕内容并自动执行操作来完成用户任务。</p>
+<ul>
+<li><p><strong>核心能力</strong>：用自然语言描述需求（如”打开美团搜索附近的火锅店”），AI 自动完成整个操作流程</p>
+</li>
+<li><p><strong>支持设备</strong>：Android（ADB）、鸿蒙（HDC）、iOS（WebDriverAgent）</p>
+</li>
+<li><p><strong>技术原理</strong>：截图 → 视觉语言模型理解界面 → 输出操作指令 → 执行 → 循环</p>
+</li>
+</ul>
+<h3 id="1-2-项目架构"><a href="#1-2-项目架构" class="headerlink" title="1.2 项目架构"></a>1.2 项目架构</h3><figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><code class="hljs nix"><br>Open-AutoGLM<span class="hljs-symbol">/</span><br><br>├── main.py <span class="hljs-comment"># 主入口程序（CLI 命令行）</span><br><br>├── ios.py <span class="hljs-comment"># iOS 专用入口</span><br><br>├── load_config.py <span class="hljs-comment"># 配置文件加载模块</span><br><br>├── config.yaml <span class="hljs-comment"># 主配置文件</span><br><br>├── requirements.txt <span class="hljs-comment"># Python 依赖</span><br><br>├── setup.py <span class="hljs-comment"># 包安装配置</span><br><br>│<br><br>├── phone_agent<span class="hljs-symbol">/</span> <span class="hljs-comment"># 核心 Agent 框架</span><br><br>│ ├── agent.py <span class="hljs-comment"># Android/鸿蒙 Agent 主类</span><br><br>│ ├── agent_ios.py <span class="hljs-comment"># iOS Agent 主类</span><br><br>│ ├── device_factory.py <span class="hljs-comment"># 设备工厂（ADB/HDC/iOS切换）</span><br><br>│ │<br><br>│ ├── adb<span class="hljs-symbol">/</span> <span class="hljs-comment"># Android ADB 工具集</span><br><br>│ ├── hdc<span class="hljs-symbol">/</span> <span class="hljs-comment"># 鸿蒙 HDC 工具集</span><br><br>│ ├── xctest<span class="hljs-symbol">/</span> <span class="hljs-comment"># iOS XCTest 工具集</span><br><br>│ │<br><br>│ ├── actions<span class="hljs-symbol">/</span> <span class="hljs-comment"># 动作执行处理</span><br><br>│ ├── assertion<span class="hljs-symbol">/</span> <span class="hljs-comment"># 断言验证模块</span><br><br>│ ├── teams<span class="hljs-symbol">/</span> <span class="hljs-comment"># Multi-Agent 协作框架</span><br><br>│ ├── config<span class="hljs-symbol">/</span> <span class="hljs-comment"># 配置管理</span><br><br>│ └── model<span class="hljs-symbol">/</span> <span class="hljs-comment"># AI 模型客户端</span><br><br>│<br><br>├── configs<span class="hljs-symbol">/</span> <span class="hljs-comment"># 外部配置文件</span><br><br>├── docs<span class="hljs-symbol">/</span> <span class="hljs-comment"># 文档</span><br><br>├── examples<span class="hljs-symbol">/</span> <span class="hljs-comment"># 使用示例</span><br><br>├── resources<span class="hljs-symbol">/</span> <span class="hljs-comment"># 资源文件</span><br><br>├── scripts<span class="hljs-symbol">/</span> <span class="hljs-comment"># 工具脚本</span><br><br>└── test_cases<span class="hljs-symbol">/</span> <span class="hljs-comment"># 测试用例</span><br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="二、根目录文件详解"><a href="#二、根目录文件详解" class="headerlink" title="二、根目录文件详解"></a>二、根目录文件详解</h2><h3 id="2-1-核心程序文件"><a href="#2-1-核心程序文件" class="headerlink" title="2.1 核心程序文件"></a>2.1 核心程序文件</h3><p>| 文件 | 说明 |</p>
+<p>|——|——|</p>
+<p>| <code>main.py</code> | <strong>主入口程序</strong>：提供 CLI 命令行接口，支持交互模式和单次任务模式。处理设备检查、配置加载、Agent 初始化 |</p>
+<p>| <code>ios.py</code> | <strong>iOS 专用入口</strong>：针对 iOS 设备的特殊启动脚本 |</p>
+<p>| <code>load_config.py</code> | <strong>配置加载器</strong>：从 config.yaml 读取配置，支持环境变量和命令行参数覆盖 |</p>
+<p>| <code>config.yaml</code> | <strong>主配置文件</strong>：模型 API 地址、Agent 参数、设备配置等 |</p>
+<p>| <code>setup.py</code> | <strong>安装脚本</strong>：定义包的元数据、依赖、入口点 |</p>
+<p>| <code>requirements.txt</code> | <strong>依赖清单</strong>：Pillow, openai, PyYAML, uiautomator2 等 |</p>
+<h3 id="2-2-配置优先级"><a href="#2-2-配置优先级" class="headerlink" title="2.2 配置优先级"></a>2.2 配置优先级</h3><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><br>命令行参数 &gt; 环境变量 &gt; config.yaml &gt; 默认值<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-3-主要环境变量"><a href="#2-3-主要环境变量" class="headerlink" title="2.3 主要环境变量"></a>2.3 主要环境变量</h3><p>| 变量名 | 说明 | 默认值 |</p>
+<p>|——–|——|——–|</p>
+<p>| <code>PHONE_AGENT_BASE_URL</code> | 模型 API 地址 | <code>http://localhost:8000/v1</code> |</p>
+<p>| <code>PHONE_AGENT_MODEL</code> | 模型名称 | <code>autoglm-phone-9b</code> |</p>
+<p>| <code>PHONE_AGENT_API_KEY</code> | API Key | <code>EMPTY</code> |</p>
+<p>| <code>PHONE_AGENT_MAX_STEPS</code> | 最大步数 | <code>100</code> |</p>
+<p>| <code>PHONE_AGENT_DEVICE_TYPE</code> | 设备类型 | <code>adb</code> |</p>
+<p>| <code>PHONE_AGENT_LANG</code> | 语言 | <code>cn</code> |</p>
+<hr>
+<h2 id="三、phone-agent-核心模块详解"><a href="#三、phone-agent-核心模块详解" class="headerlink" title="三、phone_agent 核心模块详解"></a>三、phone_agent 核心模块详解</h2><h3 id="3-1-顶层模块"><a href="#3-1-顶层模块" class="headerlink" title="3.1 顶层模块"></a>3.1 顶层模块</h3><p>| 文件 | 功能说明 |</p>
+<p>|——|———-|</p>
+<p>| <code>__init__.py</code> | 包导出：暴露 <code>PhoneAgent</code> 和 <code>IOSPhoneAgent</code> 类 |</p>
+<p>| <code>agent.py</code> | <strong>Android&#x2F;鸿蒙 Agent 核心</strong>：实现任务执行循环、截图、模型调用、动作解析 |</p>
+<p>| <code>agent_ios.py</code> | <strong>iOS Agent 核心</strong>：针对 iOS 的特殊实现 |</p>
+<p>| <code>device_factory.py</code> | <strong>设备工厂</strong>：根据设备类型（ADB&#x2F;HDC&#x2F;iOS）动态选择实现 |</p>
+<h3 id="3-2-ADB-模块（Android）"><a href="#3-2-ADB-模块（Android）" class="headerlink" title="3.2 ADB 模块（Android）"></a>3.2 ADB 模块（Android）</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br>phone_agent<span class="hljs-regexp">/adb/</span><br><br>├── __init__.py <span class="hljs-comment"># 导出所有公共 API</span><br><br>├── connection.py <span class="hljs-comment"># ADB 连接管理（USB/WiFi）</span><br><br>├── device.py <span class="hljs-comment"># 设备控制（点击、滑动、启动应用）</span><br><br>├── input.py <span class="hljs-comment"># 文本输入（ADB Keyboard）</span><br><br>└── screenshot.py <span class="hljs-comment"># 屏幕截图</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>核心功能</strong>：</p>
+<ul>
+<li><p><code>ADBConnection</code>：连接管理（connect&#x2F;disconnect&#x2F;tcpip）</p>
+</li>
+<li><p><code>tap/swipe/back/home/launch_app</code>：设备操作</p>
+</li>
+<li><p><code>type_text/clear_text</code>：文本输入</p>
+</li>
+<li><p><code>get_screenshot</code>：获取截图</p>
+</li>
+<li><p><code>detect_and_set_adb_keyboard</code>：自动检测和设置 ADB 键盘</p>
+</li>
+</ul>
+<h3 id="3-3-HDC-模块（鸿蒙-HarmonyOS）"><a href="#3-3-HDC-模块（鸿蒙-HarmonyOS）" class="headerlink" title="3.3 HDC 模块（鸿蒙 HarmonyOS）"></a>3.3 HDC 模块（鸿蒙 HarmonyOS）</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br>phone_agent<span class="hljs-regexp">/hdc/</span><br><br>├── __init__.py <span class="hljs-comment"># 导出所有公共 API</span><br><br>├── connection.py <span class="hljs-comment"># HDC 连接管理</span><br><br>├── device.py <span class="hljs-comment"># 设备控制</span><br><br>├── input.py <span class="hljs-comment"># 文本输入</span><br><br>└── screenshot.py <span class="hljs-comment"># 屏幕截图</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>功能与 ADB 模块相同，针对鸿蒙系统的原生实现</strong></p>
+<h3 id="3-4-XCTest-模块（iOS）"><a href="#3-4-XCTest-模块（iOS）" class="headerlink" title="3.4 XCTest 模块（iOS）"></a>3.4 XCTest 模块（iOS）</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br>phone_agent<span class="hljs-regexp">/xctest/</span><br><br>├── __init__.py <span class="hljs-comment"># 导出所有公共 API</span><br><br>├── connection.py <span class="hljs-comment"># WebDriverAgent 连接</span><br><br>├── device.py <span class="hljs-comment"># iOS 设备控制</span><br><br>├── input.py <span class="hljs-comment"># 文本输入</span><br><br>└── screenshot.py <span class="hljs-comment"># 屏幕截图</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>通过 WebDriverAgent&#x2F;XCUITest 实现 iOS 设备控制</strong></p>
+<h3 id="3-5-Actions-模块（动作处理）"><a href="#3-5-Actions-模块（动作处理）" class="headerlink" title="3.5 Actions 模块（动作处理）"></a>3.5 Actions 模块（动作处理）</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs vim"><br>phone_agent/actions/<br><br>├── __init__.<span class="hljs-keyword">py</span> # 导出 <span class="hljs-keyword">do</span>/<span class="hljs-keyword">finish</span>/parse_action 函数<br><br>├── handler.<span class="hljs-keyword">py</span> # Android/鸿蒙动作执行器<br><br>└── handler_ios.<span class="hljs-keyword">py</span> # iOS 动作执行器<br><br></code></pre></td></tr></table></figure>
+
+<p><strong>支持的动作类型</strong>：</p>
+<ul>
+<li><p><code>Launch</code> - 启动应用</p>
+</li>
+<li><p><code>Tap</code> - 点击</p>
+</li>
+<li><p><code>Type</code> - 输入文本</p>
+</li>
+<li><p><code>Swipe</code> - 滑动</p>
+</li>
+<li><p><code>Back</code> - 返回</p>
+</li>
+<li><p><code>Home</code> - 回桌面</p>
+</li>
+<li><p><code>Long Press</code> - 长按</p>
+</li>
+<li><p><code>Double Tap</code> - 双击</p>
+</li>
+<li><p><code>Wait</code> - 等待</p>
+</li>
+<li><p><code>Take_over</code> - 人工接管</p>
+</li>
+</ul>
+<h3 id="3-6-Assertion-模块（断言验证）"><a href="#3-6-Assertion-模块（断言验证）" class="headerlink" title="3.6 Assertion 模块（断言验证）"></a>3.6 Assertion 模块（断言验证）</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br>phone_agent<span class="hljs-regexp">/assertion/</span><br><br>├── __init__.py <span class="hljs-comment"># 模块导出</span><br><br>├── assertion_agent.py <span class="hljs-comment"># 断言专用 Agent</span><br><br>├── assertion_rules.py <span class="hljs-comment"># 断言规则解析</span><br><br>├── assertion_watcher.py <span class="hljs-comment"># 断言监控器</span><br><br>├── image_diff.py <span class="hljs-comment"># 图像差异对比</span><br><br>├── ocr_engine.py <span class="hljs-comment"># OCR 文字识别（PaddleOCR）</span><br><br>└── runner.py <span class="hljs-comment"># 断言执行器</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>功能</strong>：</p>
+<ul>
+<li><p>每次点击后自动验证操作是否成功</p>
+</li>
+<li><p>支持通过 YAML 配置文件定义断言规则</p>
+</li>
+<li><p>支持 OCR 识别屏幕文字进行验证</p>
+</li>
+<li><p>图像差异检测判断页面变化</p>
+</li>
+</ul>
+<h3 id="3-7-Teams-模块（Multi-Agent-协作）"><a href="#3-7-Teams-模块（Multi-Agent-协作）" class="headerlink" title="3.7 Teams 模块（Multi-Agent 协作）"></a>3.7 Teams 模块（Multi-Agent 协作）</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br>phone_agent<span class="hljs-regexp">/teams/</span><br><br>├── __init__.py <span class="hljs-comment"># 导出 TeamCoordinator</span><br><br>└── coordinator.py <span class="hljs-comment"># 团队协调器</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>功能</strong>：</p>
+<ul>
+<li><p>多 Agent 协作完成复杂任务</p>
+</li>
+<li><p>任务分解和分配</p>
+</li>
+<li><p>结果汇总</p>
+</li>
+</ul>
+<h3 id="3-8-Config-模块（配置管理）"><a href="#3-8-Config-模块（配置管理）" class="headerlink" title="3.8 Config 模块（配置管理）"></a>3.8 Config 模块（配置管理）</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br>phone_agent<span class="hljs-regexp">/config/</span><br><br>├── __init__.py <span class="hljs-comment"># 导出配置函数</span><br><br>├── apps.py <span class="hljs-comment"># Android 支持的应用列表</span><br><br>├── apps_harmonyos.py <span class="hljs-comment"># 鸿蒙支持的应用列表</span><br><br>├── apps_ios.py <span class="hljs-comment"># iOS 支持的应用列表</span><br><br>├── i18n.py <span class="hljs-comment"># 国际化文本</span><br><br>├── prompts.py <span class="hljs-comment"># 通用 Prompt 模板</span><br><br>├── prompts_zh.py <span class="hljs-comment"># 中文 System Prompt</span><br><br>├── prompts_en.py <span class="hljs-comment"># 英文 System Prompt</span><br><br>└── timing.py <span class="hljs-comment"># 时序配置（延迟、等待时间）</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>支持的应用分类</strong>：</p>
+<ul>
+<li><p><strong>Android（50+ 款）</strong>：微信、QQ、淘宝、京东、美团、抖音、小红书等</p>
+</li>
+<li><p><strong>鸿蒙（60+ 款）</strong>：在 Android 基础上增加华为原生应用</p>
+</li>
+<li><p><strong>iOS</strong>：通过 WebDriverAgent 支持 iOS 应用</p>
+</li>
+</ul>
+<h3 id="3-9-Model-模块（AI-模型客户端）"><a href="#3-9-Model-模块（AI-模型客户端）" class="headerlink" title="3.9 Model 模块（AI 模型客户端）"></a>3.9 Model 模块（AI 模型客户端）</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs awk"><br>phone_agent<span class="hljs-regexp">/model/</span><br><br>├── __init__.py <span class="hljs-comment"># 导出 ModelClient、ModelConfig</span><br><br>└── client.py <span class="hljs-comment"># OpenAI 兼容的模型客户端</span><br><br></code></pre></td></tr></table></figure>
+
+<p><strong>功能</strong>：</p>
+<ul>
+<li><p>通过 OpenAI 兼容 API 调用视觉语言模型</p>
+</li>
+<li><p>支持流式响应</p>
+</li>
+<li><p>解析模型的思考过程（thinking）和动作（action）</p>
+</li>
+</ul>
+<hr>
+<h2 id="四、文档目录（docs-）"><a href="#四、文档目录（docs-）" class="headerlink" title="四、文档目录（docs&#x2F;）"></a>四、文档目录（docs&#x2F;）</h2><p>| 文件&#x2F;目录 | 说明 |</p>
+<p>|———–|——|</p>
+<p>| <code>ios_setup/ios_setup.md</code> | iOS 环境配置指南（WebDriverAgent 安装） |</p>
+<p>| <code>ASSERTION_ISSUES_FIX.md</code> | 断言问题修复文档 |</p>
+<p>| <code>ASSERTION_OPTIMIZATION.md</code> | 断言性能优化指南 |</p>
+<p>| <code>SYNTAX_ERROR_FIX.md</code> | 语法错误修复文档 |</p>
+<hr>
+<h2 id="五、配置文件目录（configs-）"><a href="#五、配置文件目录（configs-）" class="headerlink" title="五、配置文件目录（configs&#x2F;）"></a>五、配置文件目录（configs&#x2F;）</h2><p>| 文件 | 说明 |</p>
+<p>|——|——|</p>
+<p>| <code>assertion_rules.yaml</code> | <strong>断言规则配置</strong>：定义正确&#x2F;错误条件、期望&#x2F;禁止出现的屏幕元素 |</p>
+<hr>
+<h2 id="六、测试用例目录（test-cases-）"><a href="#六、测试用例目录（test-cases-）" class="headerlink" title="六、测试用例目录（test_cases&#x2F;）"></a>六、测试用例目录（test_cases&#x2F;）</h2><p>| 文件 | 说明 |</p>
+<p>|——|——|</p>
+<p>| <code>run_reservation_order.py</code> | 预约下单测试用例 |</p>
+<p>| <code>run_wechat_storage_bycode.py</code> | 微信小程序存储功能测试 |</p>
+<hr>
+<h2 id="七、脚本目录（scripts-）"><a href="#七、脚本目录（scripts-）" class="headerlink" title="七、脚本目录（scripts&#x2F;）"></a>七、脚本目录（scripts&#x2F;）</h2><p>| 文件 | 说明 |</p>
+<p>|——|——|</p>
+<p>| <code>check_deployment_cn.py</code> | 中文模型部署验证脚本 |</p>
+<p>| <code>check_deployment_en.py</code> | 英文模型部署验证脚本 |</p>
+<p>| <code>sample_messages.json</code> | 中文测试消息样本 |</p>
+<p>| <code>sample_messages_en.json</code> | 英文测试消息样本 |</p>
+<hr>
+<h2 id="八、资源目录（resources-）"><a href="#八、资源目录（resources-）" class="headerlink" title="八、资源目录（resources&#x2F;）"></a>八、资源目录（resources&#x2F;）</h2><p>| 文件 | 说明 |</p>
+<p>|——|——|</p>
+<p>| <code>logo.svg</code> | 项目 Logo |</p>
+<p>| <code>WECHAT.md</code> | 微信社区二维码 |</p>
+<p>| <code>privacy_policy.txt</code> | 中文隐私政策 |</p>
+<p>| <code>privacy_policy_en.txt</code> | 英文隐私政策 |</p>
+<p>| <code>*.png, *.jpg</code> | 文档用截图 |</p>
+<hr>
+<h2 id="九、核心工作流程"><a href="#九、核心工作流程" class="headerlink" title="九、核心工作流程"></a>九、核心工作流程</h2><h3 id="9-1-任务执行流程"><a href="#9-1-任务执行流程" class="headerlink" title="9.1 任务执行流程"></a>9.1 任务执行流程</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs markdown"><br>用户输入任务<br><br>↓<br><br><span class="hljs-bullet">1.</span> 截取当前屏幕 → 获取屏幕截图和当前应用名<br><br>↓<br><br><span class="hljs-bullet">2.</span> 构建消息 → System Prompt + 任务描述 + 屏幕信息 + 截图<br><br>↓<br><br><span class="hljs-bullet">3.</span> 调用视觉模型 → 返回 thinking（思考）和 action（动作）<br><br>↓<br><br><span class="hljs-bullet">4.</span> 解析动作 → 提取要执行的操作类型和参数<br><br>↓<br><br><span class="hljs-bullet">5.</span> 执行动作 → 通过 ADB/HDC/iOS 控制设备<br><br>↓<br><br><span class="hljs-bullet">6.</span> 断言验证（可选）→ 验证操作是否成功<br><br>↓<br><br><span class="hljs-bullet">7.</span> 循环继续 → 直到任务完成或达到最大步数<br><br></code></pre></td></tr></table></figure>
+
+<h3 id="9-2-设备抽象层"><a href="#9-2-设备抽象层" class="headerlink" title="9.2 设备抽象层"></a>9.2 设备抽象层</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><br>DeviceFactory（设备工厂）<br><br>├── DeviceType<span class="hljs-selector-class">.ADB</span> → 使用 phone_agent<span class="hljs-selector-class">.adb</span> 模块<br><br>├── DeviceType<span class="hljs-selector-class">.HDC</span> → 使用 phone_agent<span class="hljs-selector-class">.hdc</span> 模块<br><br>└── DeviceType<span class="hljs-selector-class">.IOS</span> → 使用 phone_agent<span class="hljs-selector-class">.xctest</span> 模块<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十、支持的模型"><a href="#十、支持的模型" class="headerlink" title="十、支持的模型"></a>十、支持的模型</h2><h3 id="10-1-官方模型"><a href="#10-1-官方模型" class="headerlink" title="10.1 官方模型"></a>10.1 官方模型</h3><p>| 模型 | 说明 |</p>
+<p>|——|——|</p>
+<p>| <code>AutoGLM-Phone-9B</code> | 中文优化模型 |</p>
+<p>| <code>AutoGLM-Phone-9B-Multilingual</code> | 多语言模型 |</p>
+<h3 id="10-2-部署方式"><a href="#10-2-部署方式" class="headerlink" title="10.2 部署方式"></a>10.2 部署方式</h3><p><strong>方式 A：第三方服务（推荐）</strong></p>
+<ul>
+<li><p>智谱 BigModel：<code>https://open.bigmodel.cn/api/paas/v4</code></p>
+</li>
+<li><p>ModelScope：<code>https://api-inference.modelscope.cn/v1</code></p>
+</li>
+</ul>
+<p><strong>方式 B：本地部署</strong></p>
+<ul>
+<li><p>vLLM 部署</p>
+</li>
+<li><p>SGLang 部署</p>
+</li>
+</ul>
+<hr>
+<h2 id="十一、使用方式"><a href="#十一、使用方式" class="headerlink" title="十一、使用方式"></a>十一、使用方式</h2><h3 id="11-1-命令行使用"><a href="#11-1-命令行使用" class="headerlink" title="11.1 命令行使用"></a>11.1 命令行使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash"><br><span class="hljs-comment"># 交互模式</span><br><br>python main.py --base-url http://localhost:8000/v1 --model <span class="hljs-string">&quot;autoglm-phone-9b&quot;</span><br><br>  <br><br><span class="hljs-comment"># 单次任务</span><br><br>python main.py --base-url http://localhost:8000/v1 <span class="hljs-string">&quot;打开美团搜索附近的火锅店&quot;</span><br><br>  <br><br><span class="hljs-comment"># 指定设备类型</span><br><br>python main.py --device-type hdc --base-url <span class="hljs-string">&quot;...&quot;</span> <span class="hljs-string">&quot;任务描述&quot;</span> <span class="hljs-comment"># 鸿蒙</span><br><br>python main.py --device-type ios --base-url <span class="hljs-string">&quot;...&quot;</span> <span class="hljs-string">&quot;任务描述&quot;</span> <span class="hljs-comment"># iOS</span><br><br></code></pre></td></tr></table></figure>
+
+<h3 id="11-2-Python-API"><a href="#11-2-Python-API" class="headerlink" title="11.2 Python API"></a>11.2 Python API</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">from</span> phone_agent <span class="hljs-keyword">import</span> PhoneAgent<br><br><span class="hljs-keyword">from</span> phone_agent.model <span class="hljs-keyword">import</span> ModelConfig<br><br>  <br><br>model_config = ModelConfig(base_url=<span class="hljs-string">&quot;http://localhost:8000/v1&quot;</span>)<br><br>agent = PhoneAgent(model_config=model_config)<br><br>result = agent.run(<span class="hljs-string">&quot;打开淘宝搜索无线耳机&quot;</span>)<br><br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="十二、技术特点"><a href="#十二、技术特点" class="headerlink" title="十二、技术特点"></a>十二、技术特点</h2><ol>
+<li><p><strong>多设备支持</strong>：统一接口支持 Android、鸿蒙、iOS</p>
+</li>
+<li><p><strong>视觉理解</strong>：基于 AutoGLM 视觉语言模型理解界面</p>
+</li>
+<li><p><strong>断言验证</strong>：每次操作后自动验证是否成功</p>
+</li>
+<li><p><strong>配置驱动</strong>：通过 YAML 配置文件灵活调整行为</p>
+</li>
+<li><p><strong>多 Agent 协作</strong>：支持复杂任务的多 Agent 分解</p>
+</li>
+<li><p><strong>远程调试</strong>：支持 WiFi&#x2F;网络远程连接设备</p>
+</li>
+</ol>
+<hr>
+<h2 id="十三、项目统计"><a href="#十三、项目统计" class="headerlink" title="十三、项目统计"></a>十三、项目统计</h2><p>| 类别 | 数量 |</p>
+<p>|——|——|</p>
+<p>| Python 文件 | ~50 个 |</p>
+<p>| 支持设备类型 | 3 种（ADB&#x2F;HDC&#x2F;iOS） |</p>
+<p>| 支持应用 | 60+ 款 |</p>
+<p>| 支持动作 | 10+ 种 |</p>
+<p>| 文档语言 | 中文、英文 |</p>
+<hr>
+<h1 id="如何自动化configs-assertion-rules-yaml"><a href="#如何自动化configs-assertion-rules-yaml" class="headerlink" title="如何自动化configs&#x2F;assertion_rules.yaml"></a>如何自动化configs&#x2F;assertion_rules.yaml</h1><ul>
+<li>action_rules 定义规则</li>
+<li>动作类型</li>
+<li>动作类型的描述</li>
+<li>执行了动作过后，正确的时候是什么样，错误的时候是什么样子（correct_conditions， incorrect_conditions）</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9A%8F%E7%AC%94/" class="print-no-link">#随笔</a>
+      
+    </div>
+  
+</div>
+
+
+              
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2026/03/18/%E5%A6%82%E4%BD%95%E9%80%9A%E8%BF%87hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" title="如何通过hexo搭建个人博客">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">如何通过hexo搭建个人博客</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/18/AIhelper%20%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3/" title="AIhelper 项目需求文档">
+                        <span class="hidden-mobile">AIhelper 项目需求文档</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
