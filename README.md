@@ -44,7 +44,7 @@ git add .
 git commit -m '提交信息'
 git push origin main 
 
-// 等待几分钟即可
+// 等待几分钟即可，就可以通过shiqinging.github.io访问网站了
 ```
 
 ## 📁 项目结构
@@ -57,8 +57,9 @@ git push origin main
 │   └── img/             # 图片资源
 ├── themes/              # 主题目录
 ├── scaffolds/           # 文章模板
-├── public/              # 生成的静态文件（构建后）
-├── _config.fluid.yml    # Fluid 主题配置
+├── docs/                # 生成的静态文件（构建后，用于 GitHub Pages 部署）
+├── _config.yml          # Hexo 主配置
+├── _config.fluid.yml    # Fluid 主题配置（位于 source/_data/）
 └── package.json         # 项目配置
 ```
 
