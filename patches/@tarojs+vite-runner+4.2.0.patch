@@ -1,0 +1,13 @@
+diff --git a/node_modules/@tarojs/vite-runner/dist/mini/config.js b/node_modules/@tarojs/vite-runner/dist/mini/config.js
+index 50d0e59..e2edb62 100644
+--- a/node_modules/@tarojs/vite-runner/dist/mini/config.js
++++ b/node_modules/@tarojs/vite-runner/dist/mini/config.js
+@@ -264,7 +264,7 @@ function default_1(viteCompilerContext) {
+                 },
+                 css: {
+                     postcss: {
+-                        plugins: (0, utils_1.getPostcssPlugins)(appPath, __postcssOption, constants_1.MINI_EXCLUDE_POSTCSS_PLUGIN_NAME),
++                        plugins: (() => { const _plugins = (0, utils_1.getPostcssPlugins)(appPath, __postcssOption, [...constants_1.MINI_EXCLUDE_POSTCSS_PLUGIN_NAME, 'postcss-pxtransform']); const tailwindcss = require('tailwindcss'); _plugins.push(tailwindcss); return _plugins; })(),
+                     },
+                     preprocessorOptions: Object.assign(Object.assign({}, (yield getSassOption())), { less: taroConfig.lessLoaderOption || {}, stylus: taroConfig.stylusLoaderOption || {} }),
+                     modules: (0, utils_1.getCSSModulesOptions)(taroConfig),

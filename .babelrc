@@ -1,0 +1,4 @@
+export default {
+  esversion: 'es6',
+  module: false,
+}

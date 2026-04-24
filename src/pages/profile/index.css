@@ -1,0 +1,10 @@
+/* Profile page — minimal CSS for mini program specific features */
+
+.top-half-translate {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.mb-half {
+  margin-bottom: 2px;
+}

@@ -1,0 +1,46 @@
+.top-bar-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: rgba(245, 251, 239, 0.9);
+  max-width: 540px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.top-bar-bar__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 3px solid #becab9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(135deg, #f0f6ea, #eaf0e4);
+  flex-shrink: 0;
+}
+
+.top-bar-bar__title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #006e1c;
+  letter-spacing: 0.05em;
+}
+
+.top-bar-bar__settings {
+  padding: 8px;
+  font-size: 18px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.heatmap-cell {
+  width: calc((100% - 6 * 6px) / 7);
+  aspect-ratio: 1;
+  border-radius: 10px;
+}
